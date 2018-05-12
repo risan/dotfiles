@@ -1,0 +1,116 @@
+priority -50
+
+snippet fu "Function" b
+function ${1:name}(${2})
+{
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet class "Class file declaration" b
+<?php
+
+namespace ${1:`!p
+relpath = os.path.relpath(path)
+snip.rv = "\\".join([x.capitalize() for x in relpath.split('/')[:-1]])
+`};
+
+class ${2:`!p snip.rv=snip.basename`}
+{
+	${0}
+}
+endsnippet
+
+snippet interface "Interface file declaration" b
+<?php
+
+namespace ${1:`!p
+relpath = os.path.relpath(path)
+snip.rv = "\\".join([x.capitalize() for x in relpath.split('/')[:-1]])
+`};
+
+Interface ${2:`!p snip.rv=snip.basename`}
+{
+	${0}
+}
+endsnippet
+
+snippet trait "Trait file declaration" b
+<?php
+
+namespace ${1:`!p
+relpath = os.path.relpath(path)
+snip.rv = "\\".join([x.capitalize() for x in relpath.split('/')[:-1]])
+`};
+
+Trait ${2:`!p snip.rv=snip.basename`}
+{
+	${0}
+}
+endsnippet
+
+snippet ns "Namespace" b
+namespace ${1:`!p
+relpath = os.path.relpath(path)
+snip.rv = "\\".join([x.capitalize() for x in relpath.split('/')[:-1]])
+`};${0}
+endsnippet
+
+snippet cl "Class declaration" b
+class ${1:`!p snip.rv=snip.basename`}
+{
+	${0}
+}
+endsnippet
+
+snippet pubp "Public property" b
+public $${1:name};${0}
+endsnippet
+
+snippet prop "Protected property" b
+protected $${1:name};${0}
+endsnippet
+
+snippet prip "Private property" b
+private $${1:name};${0}
+endsnippet
+
+snippet con "Class constructor" b
+public function __construct(${1})
+{
+	${0}
+}
+endsnippet
+
+snippet pub "Public function" b
+public function ${1:name}(${2})
+{
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet pro "Protected function" b
+protected function ${1:name}(${2})
+{
+	${0:${VISUAL}}
+}
+endsnippet
+
+
+snippet pri "Private function" b
+private function ${1:name}(${2})
+{
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet pubs "Public static function" b
+public static function ${1:name}(${2})
+{
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet $ "$this->"
+$this->${0}
+endsnippet

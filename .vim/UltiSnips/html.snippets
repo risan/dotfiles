@@ -1,0 +1,240 @@
+priority -50
+
+snippet html "HTML basic structure" b
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>${1:`!p snip.rv = snip.basename.replace('-', ' ').capitalize()`}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	</head>
+	<body>
+		$0
+	</body>
+</html>
+endsnippet
+
+snippet a "<a>" w
+<a href="${1:#}">$2</a>
+endsnippet
+
+snippet article "<article>" w
+<article>
+	${0:${VISUAL}}
+</article>
+endsnippet
+
+snippet block "<blockquote>" w
+<blockquote>$1</blockquote>
+endsnippet
+
+snippet br "<br>" w
+<br>
+endsnippet
+
+snippet button "<button>" w
+<button type="${1:button}">$2</button>
+endsnippet
+
+snippet class "class attribute"
+class="$1"
+endsnippet
+
+snippet div "<div>" w
+<div>
+	${0:${VISUAL}}
+</div>
+endsnippet
+
+snippet em "<em>" w
+<em>$1</em>
+endsnippet
+
+snippet fieldset "<fieldset>" w
+<fieldset>
+	${0:${VISUAL}}
+</fieldset>
+endsnippet
+
+snippet footer "<footer>" w
+<footer>
+	${0:${VISUAL}}
+</footer>
+endsnippet
+
+snippet form "<form>" w
+<form>
+	${0:${VISUAL}}
+</form>
+endsnippet
+
+snippet h1 "<h1>" w
+<h1>$1</h1>
+endsnippet
+
+snippet h2 "<h2>" w
+<h2>$1</h2>
+endsnippet
+
+snippet h3 "<h3>" w
+<h3>$1</h3>
+endsnippet
+
+snippet h4 "<h4>" w
+<h4>$1</h4>
+endsnippet
+
+snippet h5 "<h5>" w
+<h5>$1</h5>
+endsnippet
+
+snippet h6 "<h6>" w
+<h6>$1</h6>
+endsnippet
+
+snippet header "<header>" w
+<header>
+	${0:${VISUAL}}
+</header>
+endsnippet
+
+snippet hr "<hr>" w
+<hr>
+endsnippet
+
+snippet i "<i>" w
+<i>$1</i>
+endsnippet
+
+snippet img "<img>" w
+<img src="$1">
+endsnippet
+
+snippet input "<input>" w
+<input type="${1:text}" ${2:name="$3"}>
+endsnippet
+
+snippet label "<label>"
+<label>$1</label>
+endsnippet
+
+snippet li "<li>" w
+<li>$1</li>
+endsnippet
+
+snippet link "<link>" w
+<link rel="${1:stylesheet}" href="${2:styles.css}">
+endsnippet
+
+snippet main "<main>" w
+<main>
+	${0:${VISUAL}}
+</main>
+endsnippet
+
+snippet meta "<meta>" w
+<meta name="${1:name}" content="${2:content}">
+endsnippet
+
+snippet nav "<nav>" w
+<nav>
+	${0:${VISUAL}}
+</nav>
+endsnippet
+
+snippet ol "<ol>" w
+<ol>
+	<li>$1</li>
+</ol>
+endsnippet
+
+snippet option "<option>" w
+<option value="$1">$2</option>
+endsnippet
+
+snippet p "<p>" w
+<p>${0:${VISUAL}}</p>
+endsnippet
+
+snippet pre "<pre>" w
+<pre>$1</pre>
+endsnippet
+
+snippet script "<script>" w
+<script src="${1:scripts.js}"></script>
+endsnippet
+
+snippet scriptin "<script> inline JavaScript code" w
+<script>
+	${0:${VISUAL}}
+</script>
+endsnippet
+
+snippet select "<select>" w
+<select ${1:name="$2"}>
+	$3
+</select>
+endsnippet
+
+snippet small "<small>" w
+<small>$1</small>
+endsnippet
+
+snippet span "<span>" w
+<span>$1</span>
+endsnippet
+
+snippet strong "<strong>" w
+<strong>$1</strong>
+endsnippet
+
+snippet table "<table>" w
+<table>
+	$1
+</table>
+endsnippet
+
+snippet tbody "<tbody>" w
+<tbody>
+	$1
+</tbody>
+endsnippet
+
+snippet td "<td>" w
+<td>$1</td>
+endsnippet
+
+snippet textarea "<textarea>" w
+<textarea ${1:name="$2"}></textarea>
+endsnippet
+
+snippet tfoot "<tfoot>" w
+<tfoot>
+	$1
+</tfoot>
+endsnippet
+
+snippet th "<th>" w
+<th>$1</th>
+endsnippet
+
+snippet thead "<thead>" w
+<thead>
+	$1
+</thead>
+endsnippet
+
+snippet title "<title>" w
+<title>${1:`!p snip.rv = snip.basename.replace('-', ' ').capitalize()`}</title>
+endsnippet
+
+snippet tr "<tr>" w
+<tr>$1</tr>
+endsnippet
+
+snippet ul "<ul>" w
+<ul>
+	<li>$1</li>
+</ul>
+endsnippet
