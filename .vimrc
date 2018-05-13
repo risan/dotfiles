@@ -37,7 +37,6 @@ so ~/.vim/plugins.vim
 
 
 
-
 "========================================
 " APPEARANCES
 "========================================
@@ -268,6 +267,51 @@ nmap <Leader>lv :e resources/views<CR>
 
 
 "========================================
+" CTAGS
+"========================================
+command! GenerateTags call GenerateTags()
+
+" Generate ctags file.
+function! GenerateTags()
+    " If previous job is still running.
+    if exists('g:generateTagsJob') && job_status(g:generateTagsJob) == 'run'
+        echo 'The previous tags file generation is still in progress.'
+    else
+        " JavaScript-kinds:
+        " - f: functions
+        " - c: classes
+        " - m: methods
+        " - p: properties (still not working)
+        " - C: constants
+        " - v: global variables
+        "
+        " PHP-kinds
+        " - c: classes
+        " - d: constant definitions
+        " - f: functions and methods
+        " - i: interfaces
+        " - n: namespaces
+        " - t: traits
+        " - v: variables and class properties
+        let cmd = 'ctags -R
+            \ --languages=JavaScript,PHP
+            \ --JavaScript-kinds=fcmpCv
+            \ --PHP-kinds=cdfintv
+            \ --exclude=.git
+            \ --exclude=node_modules
+            \ --exclude=public
+            \ --exclude="*.min.js"'
+
+        " Synchronously run the command.
+        let g:generateTagsJob = job_start(cmd)
+        echo 'Generating tags file.'
+    endif
+endfunction
+
+
+
+
+"========================================
 " MACROS
 "========================================
 " PHP add class property.
@@ -304,8 +348,6 @@ nmap <silent> <Leader>e :CtrlPMRUFiles<CR>
 
 " Fuzzy search for buffers.
 nmap <silent> <Leader>b :CtrlPBuffer<CR>
-
-" ctags -R --languages=PHP,JavaScript --PHP-kinds=cdfintv --JavaScript-kinds=fcmpCv --exclude=node_modules
 
 
 " greplace.vim
