@@ -1,6 +1,9 @@
 " Always use the improved version.
 set nocompatible
 
+" Automatically detect file changes outside of vim.
+set autoread
+
 " Automatically write the file when switching buffer.
 set autowriteall
 
@@ -11,8 +14,11 @@ set clipboard^=unnamed,unnamedplus
 " Don't redraw screen while executing macros or registers.
 set lazyredraw
 
-" Automatically detect file changes outside of vim.
-set autoread
+" Always show status line.
+set laststatus=2
+
+" Don't show the mode, since we're using lightline.
+set noshowmode
 
 " Defines the delay of writing buffer to swap file if there's no activity.
 set updatetime=200
@@ -26,6 +32,8 @@ let g:netrw_localrmdir='rm -r'
 
 " Load the plugins.
 so ~/.vim/plugins.vim
+
+
 
 
 
@@ -102,6 +110,68 @@ set expandtab
 
 " Specify the width of tab characters in normal mode.
 set shiftwidth=4
+
+command! -nargs=1 IndentSpace call IndentSpace(<args>)
+command! -nargs=1 IndentTab call IndentTab(<args>)
+command! ReindentSpace call ReindentSpace()
+
+" Reindent space.
+function! ReindentSpace()
+    let a:from_size = 1 * input('from tab size: ')
+    let a:to_size = 1 * input('to tab size: ')
+    redraw
+
+    if (a:from_size > 0) && (a:to_size > 0)
+        call IndentTab(a:from_size, 0)
+        call IndentTab(a:to_size, 0)
+        call IndentSpace(a:to_size)
+    endif
+endfunction
+
+" Indent with space.
+function! IndentSpace(size, ...)
+    let summarize = a:0 >= 1 ? a:1 : 1
+    let &l:expandtab = 1
+    call Stab(a:size, summarize)
+    retab!
+endfunction
+
+" Indent with tab.
+function! IndentTab(size, ...)
+    let summarize = a:0 >= 1 ? a:1 : 1
+    let &l:expandtab = 0
+    call Stab(a:size, summarize)
+    retab!
+endfunction
+
+" Configure tab settings.
+function! Stab(size, ...)
+    let summarize = a:0 >= 1 ? a:1 : 1
+    let indent_size = 1 * a:size
+
+    if indent_size > 0
+        let &l:tabstop = indent_size
+        let &l:softtabstop = indent_size
+        let &l:shiftwidth = indent_size
+    endif
+
+    if summarize
+        call SummarizeTabs()
+    endif
+endfunction
+
+" Summarize tabs configuration.
+function! SummarizeTabs()
+    echohl ModeMsg
+    echon 'tabstop=' . &l:tabstop
+    echon ' shiftwidth=' . &l:shiftwidth
+    echon ' softtabstop=' . &l:softtabstop
+    if &l:expandtab
+        echon ' expandtab'
+    else
+        echon ' noexpandtab'
+    endif
+endfunction
 
 
 
@@ -247,6 +317,65 @@ set grepprg=ag
 let g:grep_cmd_opts = '--line-numbers --noheading'
 
 
+" lightline.vim
+"----------------------------------------
+let g:lightline = {
+    \ 'colorscheme': 'powerline',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ], [ 'gitbranch'  ],
+    \             [ 'readonly', 'filename'] ],
+    \   'right': [ [ 'lineinfo' ],
+    \              [ 'percent' ],
+    \              [ 'fileformat', 'fileencoding', 'filetype', 'indentwarning' ] ]
+    \ },
+    \ 'inactive': {
+    \   'left': [ [ 'filename' ]  ],
+    \   'right': [],
+    \},
+    \ 'component_function': {
+    \   'filename': 'LightlineFilename',
+    \   'gitbranch': 'fugitive#head',
+    \   'indentwarning': 'LightlineIndentWarning',
+    \   'readonly': 'LightlineReadonly'
+    \ },
+    \ }
+
+" Don't display RO on help or netrw.
+function! LightlineReadonly()
+    return &readonly && &filetype !~# '\v(help|netrw)' ? 'RO' : ''
+endfunction
+
+" Combine filename and modified sign.
+function! LightlineFilename()
+  let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+  let modified = &modified ? ' +' : ''
+  return filename . modified
+endfunction
+
+" Wrong indentation warning.
+function! LightlineIndentWarning()
+    if !&modifiable
+        return ''
+    endif
+
+    " Check for tabs.
+    let tabs = search('^\t', 'nw') != 0
+
+    " Check for spaces indentation.
+    let spaces = search('^ \{' . &tabstop . ',}[^\t]', 'nw') != 0
+
+    if tabs && spaces
+        return 'mixed indent'
+    elseif spaces && !&expandtab
+        return 'has spaces'
+    elseif tabs && &expandtab
+        return 'has tabs'
+    endif
+
+    return ''
+endfunction
+
+
 " NERDTree
 "----------------------------------------
 " Don't let NERDTree hijack the netrw.
@@ -255,6 +384,7 @@ let NERDTreeHijackNetrw = 0
 " Shortcut to open NERDTree.
 nmap <Leader>1 :NERDTreeToggle<CR>
 
+
 " PDV - PHP Documentor for VIM
 "----------------------------------------
 " Template for PHP docblock.
@@ -262,6 +392,7 @@ let g:pdv_template_dir = $HOME . '/.vim/bundle/pdv/templates_snip'
 
 " Shortcut to automatically generate a docblock.
 nnoremap <Leader>d :call pdv#DocumentWithSnip()<CR>
+
 
 " php.vim
 "----------------------------------------
