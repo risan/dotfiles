@@ -28,6 +28,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
+Plug 'ap/vim-buftabline'
 
 " Initialize plugin system
 call plug#end()

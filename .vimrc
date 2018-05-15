@@ -11,6 +11,9 @@ set autowriteall
 " clipboard.
 set clipboard^=unnamed,unnamedplus
 
+" Allow to switch to another buffer even where there's unsaved changes.
+set hidden
+
 " Don't redraw screen while executing macros or registers.
 set lazyredraw
 
@@ -32,7 +35,6 @@ let mapleader = ','
 
 " Allow netrw to remove non-empty directory.
 let g:netrw_localrmdir='rm -r'
-
 
 " Load the plugins.
 so ~/.vim/plugins.vim
@@ -233,9 +235,9 @@ set completeopt=menuone,preview
 " MAPPINGS
 "========================================
 " Shortcut to edit vimrc config files.
-nmap <Leader>ev :tabedit $MYVIMRC<CR>
-nmap <Leader>eg :tabedit ~/.gvimrc<CR>
-nmap <Leader>ep :tabedit ~/.vim/plugins.vim<CR>
+nmap <Leader>ve :tabedit ~/.vimrc<CR>
+nmap <Leader>vp :tabedit ~/.vim/plugins.vim<CR>
+nmap <Leader>vr :source $MYVIMRC<CR>
 
 " Clear the highlighted search terms.
 nmap <Leader><space> :nohlsearch<CR>
@@ -504,6 +506,12 @@ let g:strip_whitespace_on_save=1
 " Strip white lines at the end of the file.
 let g:strip_whitelines_at_eof=1
 
+" vim-buftabline
+"----------------------------------------
+
+" Shortcuts to switch to next/prev buffer.
+nnoremap <C-]> :bnext<CR>
+nnoremap <C-[> :bprev<CR>
 
 " vim-commentary
 "----------------------------------------
@@ -558,12 +566,3 @@ autocmd FileType php noremap <Leader>nf :call PhpExpandClass()<CR>
 "========================================
 " AUTO COMMANDS
 "========================================
-augroup autosourcing
-    autocmd!
-
-    " Source the .vimrc on save.
-    autocmd BufWritePost .vimrc source %
-
-    " Source the .vimrc file on plugins.vim save.
-    autocmd BufWritePost plugins.vim source $MYVIMRC
-augroup END
