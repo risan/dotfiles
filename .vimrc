@@ -23,6 +23,10 @@ set noshowmode
 " Defines the delay of writing buffer to swap file if there's no activity.
 set updatetime=200
 
+" Activate file type detection and allows for specific file type plugin and
+" indentation.
+filetype plugin indent on
+
 " Set the leader key.
 let mapleader = ','
 
@@ -32,7 +36,6 @@ let g:netrw_localrmdir='rm -r'
 
 " Load the plugins.
 so ~/.vim/plugins.vim
-
 
 
 

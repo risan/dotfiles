@@ -1,43 +1,33 @@
-" Disable file type detection.
-filetype off
-
-" Set the runtime path to include Vundle.
-set rtp+=~/.vim/bundle/Vundle.vim
-
-" Initialize Vundle.
-call vundle#begin()
-
-" Let Vundle manage Vundle.
-Plugin 'VundleVim/Vundle.vim'
+" Specify a directory for plugins.
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
 " Plugins.
-Plugin 'airblade/vim-gitgutter'
-Plugin 'arnaud-lb/vim-php-namespace'
-Plugin 'ervandew/supertab'
-Plugin 'itchyny/lightline.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'kien/ctrlp.vim'
-Plugin 'lumiliet/vim-twig'
-Plugin 'mileszs/ack.vim'
-Plugin 'morhetz/gruvbox'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'pangloss/vim-javascript'
-Plugin 'posva/vim-vue'
-Plugin 'scrooloose/nerdtree'
-Plugin 'SirVer/ultisnips'
-Plugin 'skwp/greplace.vim'
-Plugin 'StanAngeloff/php.vim'
-Plugin 'stephpy/vim-php-cs-fixer'
-Plugin 'tobyS/pdv'
-Plugin 'tobyS/vmustache'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-vinegar'
+Plug 'airblade/vim-gitgutter'
+Plug 'arnaud-lb/vim-php-namespace', { 'for': 'php' }
+Plug 'ervandew/supertab'
+Plug 'itchyny/lightline.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'kien/ctrlp.vim'
+Plug 'lumiliet/vim-twig', { 'for': 'twig' }
+Plug 'mileszs/ack.vim'
+Plug 'morhetz/gruvbox'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'posva/vim-vue', { 'for': 'vue' }
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'SirVer/ultisnips'
+Plug 'skwp/greplace.vim'
+Plug 'StanAngeloff/php.vim', { 'for': 'php' }
+Plug 'stephpy/vim-php-cs-fixer', { 'for': 'php' }
+Plug 'tobyS/pdv', { 'for': 'php' }
+Plug 'tobyS/vmustache', { 'for': 'php' }
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
 
-" End of Vundle.
-call vundle#end()
-
-" Enable file type detection allows plugin & indentation for specific file type.
-filetype plugin indent on
+" Initialize plugin system
+call plug#end()
